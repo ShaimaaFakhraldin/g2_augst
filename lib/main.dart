@@ -1,8 +1,22 @@
+import 'package:advancedui/posts_page.dart';
+import 'package:advancedui/provider/main_them.dart';
+import 'package:advancedui/provider/theme_provider.dart';
+import 'package:advancedui/provider_ex/home.dart';
+import 'package:advancedui/provider_ex/them_provider_ex.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ThemProviderEX()),
+          ],
+          child:
+
+      MyApp()));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -10,7 +24,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  Consumer<ThemProviderEX>(
+       builder: (context, themeProviderEx, child) {
+         return
+
+      MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -24,11 +42,30 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+      home: Postspage(),
+    );});
   }
 }
 
+
+//class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider<ThemeProvider>(
+//       create: (context) => ThemeProvider(),
+//       child: Consumer<ThemeProvider>(
+//         builder: (context, themeProvider, child) => MaterialApp(
+//           title: 'Flutter Provider Demo',
+//           theme: ThemeData(
+//             primarySwatch: Colors.blue,
+//             appBarTheme: AppBarTheme(brightness: Brightness.dark),
+//           ),
+//           home: MainScaffold(),
+//         ),
+//       ),
+//     );
+//   }
+// }
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
